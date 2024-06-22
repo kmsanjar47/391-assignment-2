@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#" onclick="showSection('home')">Home</a></li>
+          <li>
+            <a href="#" onclick="showSection('fortune')">Fortune Generator</a>
+          </li>
+          <li>
+            <a href="#" onclick="showSection('converter')"
+              >Currency Converter</a
+            >
+          </li>
+          <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="home-section">
+        <h1>Welcome to Our Website</h1>
+        <p>Explore our features using the navigation bar above.</p>
+      </section>
+      <section id="fortune-section" class="hidden">
+        <h1>Fortune Generator</h1>
+        <div class="fortune-box" id="fortune-box"></div>
+      </section>
+      <section id="converter-section" class="hidden">
+        <h1>Currency Converter</h1>
+        <form id="currency-form">
+          <div>
+            <label for="usd">USD:</label>
+            <input
+              type="number"
+              id="usd"
+              name="usd"
+              oninput="convertCurrency('usd')"
+            />
+          </div>
+          <div>
+            <label for="gbp">GBP:</label>
+            <input
+              type="number"
+              id="gbp"
+              name="gbp"
+              oninput="convertCurrency('gbp')"
+            />
+          </div>
+          <div>
+            <label for="cad">CAD:</label>
+            <input
+              type="number"
+              id="cad"
+              name="cad"
+              oninput="convertCurrency('cad')"
+            />
+          </div>
+          <div>
+            <label for="eur">EUR:</label>
+            <input
+              type="number"
+              id="eur"
+              name="eur"
+              oninput="convertCurrency('eur')"
+            />
+          </div>
+          <div>
+            <label for="aud">AUD:</label>
+            <input
+              type="number"
+              id="aud"
+              name="aud"
+              oninput="convertCurrency('aud')"
+            />
+          </div>
+        </form>
+      </section>
+      <section id="quiz-section" class="hidden">
+        <h1>Quiz</h1>
+        <form id="quiz-form"></form>
+        <div id="result"></div>
+      </section>
+    </main>
+    <footer>
+      <p>© 2024 Khan MD Saifullah Anjar</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
