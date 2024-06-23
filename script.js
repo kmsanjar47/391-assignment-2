@@ -108,11 +108,11 @@ const questions = [
 
 function generateQuiz() {
   const quizForm = document.getElementById("quiz-form");
+  quizForm.innerHTML = ""; // Clear previous quiz content
   const numQuestions =
     parseInt(prompt("Enter number of questions (default: 5)", "5")) || 5;
   const selectedQuestions = [];
 
-  // Select random questions
   for (let i = 0; i < numQuestions; i++) {
     let randomIndex;
     do {
@@ -125,17 +125,17 @@ function generateQuiz() {
     const questionDiv = document.createElement("div");
     questionDiv.classList.add("question");
     questionDiv.innerHTML = `
-            <p>${index + 1}. ${q.question}</p>
-            <label><input type="radio" name="question${index}" value="A"> ${
+      <p>${index + 1}. ${q.question}</p>
+      <label><input type="radio" name="question${index}" value="A"> ${
       q.choices[0]
     }</label><br>
-            <label><input type="radio" name="question${index}" value="B"> ${
+      <label><input type="radio" name="question${index}" value="B"> ${
       q.choices[1]
     }</label><br>
-            <label><input type="radio" name="question${index}" value="C"> ${
+      <label><input type="radio" name="question${index}" value="C"> ${
       q.choices[2]
     }</label><br>
-        `;
+    `;
     quizForm.appendChild(questionDiv);
   });
 
@@ -149,39 +149,42 @@ function generateQuiz() {
       const resultDiv = document.createElement("div");
       resultDiv.classList.add("result");
       resultDiv.innerHTML = `
-                <p>${index + 1}. ${q.question}</p>
-                <p>You guessed ${userAnswer ? userAnswer + ")" : ""} ${
+        <p>${index + 1}. ${q.question}</p>
+        <p>You guessed ${userAnswer ? userAnswer + ")" : ""} ${
         userAnswer ? q.choices[userAnswer.charCodeAt(0) - 65] : "No Answer"
       }</p>
-                <p>${
-                  userAnswer === q.correct
-                    ? "CORRECT"
-                    : "INCORRECT: the correct answer is " +
-                      q.correct +
-                      ")" +
-                      q.choices[q.correct.charCodeAt(0) - 65]
-                }</p>
-            `;
-      if (userAnswer && userAnswer === q.correct) correctAnswers++;
+        <p>${
+          userAnswer === q.correct
+            ? "CORRECT"
+            : "INCORRECT: the correct answer is " +
+              q.correct +
+              ")" +
+              q.choices[q.correct.charCodeAt(0) - 65]
+        }</p>
+      `;
+      if (userAnswer && userAnswer === q.correct) {
+        correctAnswers++;
+        resultDiv.classList.add("correct");
+      } else {
+        resultDiv.classList.add("incorrect");
+      }
       quizForm.appendChild(resultDiv);
     });
 
     const result = document.getElementById("result");
     result.innerHTML = `
-            <p>You answered ${correctAnswers} out of ${numQuestions} questions correctly (${(
+      <p>You answered ${correctAnswers} out of ${numQuestions} questions correctly (${(
       (correctAnswers / numQuestions) *
       100
     ).toFixed(2)}%).</p>
-        `;
+    `;
   };
   quizForm.appendChild(submitButton);
 }
 
-// Initial setup
 function initialize() {
-  showSection("home"); // Show home section by default
-  generateFortune(); // Generate initial fortune
+  showSection("home");
+  generateFortune();
 }
 
-// Event listener for page load
 window.addEventListener("load", initialize);
